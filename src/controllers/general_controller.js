@@ -8,12 +8,11 @@ const formRegistrarProspecto = async(req, res) => {
     let resultadoEscuelas = await escuelasQuery();
 
     res.render('registrarProspecto', { 
-
-        'title': 'Registrar Prospecto', 
-        'iconName': 'registrarP', 
-        'hoy': hoy, 
-        'resultadoEscuelas': resultadoEscuelas 
-    } );
+            'title': 'Registrar Prospecto', 
+            'iconName': 'registrarP', 
+            'hoy': hoy, 
+            'resultadoEscuelas': resultadoEscuelas 
+        } );
     }
 
 export {

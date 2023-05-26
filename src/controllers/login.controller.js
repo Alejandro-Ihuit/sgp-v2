@@ -7,23 +7,15 @@ const login = async(req, res) => {
 
     let resultadoQuery = await loginData( credenciales );
 
-    //formateos
-    resultadoQuery[0].per_campania.toLowerCase();
-    resultadoQuery[0].privilegio.toLowerCase();
-    
     let url = '/home', msg = '', accede = false;
-    
-    delete resultadoQuery[0].per_foto; //por ahora no me sirve la foto, es una cadena larga de caracteres, así que la elimino temporalmente del arreglo
 
-    console.log('DATOS USER', resultadoQuery)
-    
-    //resultadoQuery[0].privilegio = 'admins';
+    if( resultadoQuery.length === 0 || typeof resultadoQuery === 'undefined' ) {
 
-    //validar en primer instancia si es baja, porque si es así no tiene caso seguir con el proceso de sesion etc etc etc
-    if( resultadoQuery[0].per_baja !== 1 ) {
+        url = ''; msg = 'Error de usuario o contraseña'; accede;
 
-        //validar su privilegio
-        switch( resultadoQuery[0].privilegio ) {
+        res.json({ "url": url, "msg": msg, "accede": accede });
+    }
+    else {
 
             case USER_PRIV.ADMIN:
                     accede = true;
@@ -52,16 +44,12 @@ const login = async(req, res) => {
             req.session.depto = resultadoQuery[0].per_departamento;
         }
         else {
-            console.log('NO CREAR NADA DE VARIABLES DE SESION');
+            msg = 'Estatus Actual: Baja'; accede;        
         }
-    }  
-    else {
-        msg = 'Estatus Actual: Baja'; accede;        
+
+        res.json( { "url": url, "msg": msg, "accede": accede } );
     }
-
-    res.json( { "url": url, "msg": msg, "accede": accede } );
 }
-
 const home = (req, res) => {
 
     //if( !req.session.per_id || !req.session ) {

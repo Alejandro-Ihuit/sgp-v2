@@ -54,7 +54,7 @@ const login = () => {
                     confirmButtonText: 'OK'
                 })
                 
-                console.log('NO ACCEDE', )
+                console.log('NO ACCEDE')
             }
             else {
 
