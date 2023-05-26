@@ -5,9 +5,16 @@ const USER_CAMP = {
 }
 
 const USER_PRIV = {
-    ADMIN: 'admin',
-    ADMINISTRATIVO: 'administrativo',
-    ADMIN: 'admin'
+    ADMIN : 'admin',
+    ADMINASIST : 'adminasist',
+    ADMINISTRATIVO : 'administrativo',
+    ADMINPERSONAL : 'adminpersonal',
+    ASESOR : 'asesor',
+    CALIDAD : 'calidad',
+    CAPACITADOR : 'capacitador',
+    NOMINAS : 'nominas',
+    SUPERVISOR : 'supervisor',
+    VIP : 'vip'
 }
 
 export {
