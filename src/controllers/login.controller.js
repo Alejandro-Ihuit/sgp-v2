@@ -28,14 +28,32 @@ const login = async(req, res) => {
             case USER_PRIV.ADMIN:
                     accede = true;
                 break;
-            case 'administrativo':
-                    accede = true;;
-                break;
-            case 'nominas':
+            case USER_PRIV.ADMINASIST:
                     accede = true;
                 break;
-            case 'adminpersonal':
+            case USER_PRIV.ADMINISTRATIVO:
                     accede = true;
+                break;
+            case USER_PRIV.ADMINPERSONAL:
+                    accede = true;
+                break;
+            case USER_PRIV.ASESOR:
+                    accede = true;
+                break;
+            case USER_PRIV.CALIDAD:
+                    accede = true;
+                break;
+            case USER_PRIV.CAPACITADOR:
+                    accede = true;
+                break;
+            case USER_PRIV.NOMINAS:
+                    accede = true;
+                break;
+            case USER_PRIV.SUPERVISOR:
+                    accede = true;
+                break;
+            case USER_PRIV.VIP:
+                    accede = false;
                 break;
             default:
                     msg = 'NO TIENES PRIVILEGIO PARA USAR ESTA HERRAMIENTA'; accede; url  = '';
