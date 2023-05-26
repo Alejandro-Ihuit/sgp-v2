@@ -3,7 +3,8 @@ import { escuelasQuery } from '../models/general_model.js';
 
 const formRegistrarProspecto = async(req, res) => {
     
-    let hoy = dayjs().format('YYYY-MM-DD');
+    let hoy = dayjs().format('YYYY-MM-DD'); //mostramos la fecha actual para la vista en el formulario de registro
+
     let resultadoEscuelas = await escuelasQuery();
 
     res.render('registrarProspecto', { 
