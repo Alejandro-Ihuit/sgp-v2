@@ -64,7 +64,7 @@
                     <datalist id="escuelas" style="width: 300px;">
                         <% resultadoEscuelas.forEach( item => {  %>
                             <option value="<%= item.escuela %>">
-                        <% }) %>
+                        <% }); %>
                     </datalist>
                 </div>
             </div>
@@ -99,35 +99,51 @@
                     </div>
                 </div>
 
-                <div class="column is-2">
-                    <div id="experiencia_cc">
+                <div class="column is-3">
+                    <div>
                         <label class="label" for="cc_experience">¿En cuál fué?</label>
-                        <input class="input" type="text" name="cc_experience" id="cc_experience">
+                        <input id="experiencia_cc" class="input is-small" type="text" name="cc_experience" id="cc_experience" placeholder="Escribe el nombre del Call Center" disabled>
                     </div>
                     
-                    <label class="checkbox is-flex is-align-content-center" id="check_cc">¿Experiencia en Call Center?<input id="exp_check" type="checkbox" onclick="validarCheck(); return false;">
+                    <label class="mt-1 checkbox is-flex is-align-content-center" id="check_cc">
+                        <input id="exp_check" type="checkbox" onclick="validarCheck();" >  
+                        ¿Experiencia en Call Center?
                     </label>
                 </div>
+
+                <div class="column is-4">
+                    <label class="label" for="campania">Campaña de Interés</label>
+                    <div class="select">
+                        <select name="campania" id="campania">
+                            <option value="-" disabled="" selected="">Selecciona...</option>
+                            <% campanias.forEach( item => { %>
+                                <option value="<%= item.nombre_campania %>"><%= item.nombre_campania %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                </div>
+                
             </div>
 
         </form>
 
         <!-- <script src="js/reg_prospectos"></script> -->
         <script type="text/javascript">
-            const validarCheck = () => {
+            
+            function validarCheck() {
 
-                const campoExp = document.getElementById('experiencia_cc');
+                const chkbx = document.getElementById('exp_check');
+                const campoExpCC = document.getElementById('experiencia_cc');
 
-                const chbx = document.getElementById('exp_check');
- 
-                console.log(chbx);
-
-                return
-
-                if( chbx ){
-                    campoExp.style.display = 'block';
+                if( chkbx.checked ) {
+                    campoExpCC.disabled = false;
+                }
+                else {
+                    chkbx.placeholder = 'Marca la casilla para habilitar';
+                    campoExpCC.disabled = true;
                 }
             }
+
         </script>
     </body>
 <%- include('../views/seccionesHTML/foot.ejs'); %>

@@ -15,7 +15,7 @@ const pool = createPool({
 });
 
 //leer:
-const select = (sql) =>{
+const select210 = (sql) =>{
 	return new Promise( (resolve,reject) => {
 		pool.query(sql,(err,rows)=>{
 	    if(err){
@@ -28,7 +28,7 @@ const select = (sql) =>{
 }
 
 //insert:
- const insert = (sql)=>{
+ const insert210 = (sql)=>{
     return new Promise((resolve, reject)=>{
       pool.query(sql,(err, result)=>{
         if(err){
@@ -41,7 +41,7 @@ const select = (sql) =>{
  }
 
  //update:
- const update = (sql)=>{
+ const update210 = (sql)=>{
     return new Promise((resolve, reject)=>{
       pool.query(sql,(err, result)=>{
         if(err){
@@ -54,7 +54,7 @@ const select = (sql) =>{
  }
 
  //deletee:
- const deleteReg = (sql)=>{
+ const deleteReg210 = (sql)=>{
     return new Promise((resolve, reject)=>{
       pool.query(sql,(err, result)=>{
         if(err){
@@ -67,7 +67,7 @@ const select = (sql) =>{
  }
 
 //getlasId : using insert:
-const lastIdInsert = (sql)=>{
+const lastIdInsert210 = (sql)=>{
     return new Promise((resolve, reject)=>{
       pool.query(sql,(err, result)=>{
         if(err){
@@ -81,9 +81,9 @@ const lastIdInsert = (sql)=>{
 
 
 export {
-	select,
-	deleteReg,
-	insert,
-	lastIdInsert,
-	update
+	select210,
+	deleteReg210,
+	insert210,
+	lastIdInsert210,
+	update210
 }

@@ -5,6 +5,7 @@ const USER_CAMP = {
 }
 
 const USER_PRIV = {
+    
     ADMIN : 'admin',
     ADMINASIST : 'adminasist',
     ADMINISTRATIVO : 'administrativo',
