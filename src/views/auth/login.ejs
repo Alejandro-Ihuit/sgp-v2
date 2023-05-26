@@ -1,0 +1,34 @@
+<%- include('../seccionesHTML/head.ejs'); %>
+    <body class="has-background-grey-lighter">
+         <div class="hero is-fullheight">
+            <div class="hero-body is-justify-content-center is-align-items-center">
+                <div class="columns is-flex is-flex-direction-column box">
+
+                    <div class="columns is-justify-content-center">
+                        <h3 class="title is-3 is-justify-content-center">SGP<span id="app-version">v2.0.0</span></h3>
+                    </div>
+
+                    <div class="column">
+                        <label class="label" for="usuario">Usuario</label>
+                        <input class="input" type="text" name="usuario" id="usuario" placeholder="Nombre de usuario o EX" maxlength="15">
+                    </div>
+                    <div class="column">
+                        <label class="label" for="contrasenia">Contraseña</label>
+                        <input class="input" type="text" name="contrasenia" id="contrasenia" placeholder="************" maxlength="15">
+                        <!-- <a href="forget.html" class="is-size-7 has-text-primary">forget password?</a> -->
+                    </div>
+                    <div class="column">
+                    <button class="button is-success is-fullwidth mt-2" id="btn-iniciar-sesion">INICIAR SESIÓN</button>
+                    </div>
+                    <!--<div class="has-text-centered">
+                        <p class="is-size-7"> Don't have an account? <a href="#" class="has-text-primary">Sign up</a>
+                        </p>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <script src="libs/jquery/jquery370.js"></script>
+        <script src="js/login.js"></script>
+        <script src="libs/swal/sweetalert2.js"></script>
+    </body>
+<%- include('../seccionesHTML/foot.ejs'); %>

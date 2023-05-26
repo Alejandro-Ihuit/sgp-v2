@@ -1,0 +1,43 @@
+<nav class="navbar has-background-grey" role="navigation" aria-label="main navigation">
+    <div class="popover is-popover-right">
+
+        <div class="navbar-brand">
+
+          <div class="navbar-item">
+            <span class="popover-trigger has-text-white">
+              <i class="fa-regular fa-user"></i>
+              Usuario: <%= session.usuario %></span>
+          </div>
+        </div>
+        <div class="popover-content">
+            <p class="is-uppercase">Campaña: <%= session.per_campania %></p>
+            <p class="is-uppercase">Depto: <%= session.depto %></p>
+            <p class="is-uppercase">Nombre: <%= session.nombre_completo %></p>
+        </div>
+      </div>
+
+      <div class="navbar-item">
+        <a class="has-text-success" href="/home">
+          <i class="fa-solid fa-house"></i>
+          Inicio</a>
+      </div>
+      
+      <div class="navbar-burger" data-target="navbarExampleTransparentExample">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+            <p class="control">
+                <a class="button is-primary" href="https://github.com/jgthms/bulma/releases/download/0.9.4/bulma-0.9.4.zip">
+                  <span class="icon">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                  </span>
+                  <span>Cerrar Sesión</span>
+                </a>
+              </p>
+        </div>
+      </div>
+</nav>

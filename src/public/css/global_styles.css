@@ -1,0 +1,23 @@
+/*este archivo CSS se usa para cosas muy específicas que bulma no hace bien, o de plano no lo hace*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#app-version { /*aplied to login*/
+    font-weight: 500;
+    font-size: 0.3em;
+    color: rgb(255, 64, 0);
+}
+
+.box.card:hover { /*applied to menu cards of home*/
+    background-color: hsl(171, 100%, 41%);
+    color: #000;
+    cursor: pointer;
+}
+
+#experiencia_cc {
+
+    display: none;
+
+}
