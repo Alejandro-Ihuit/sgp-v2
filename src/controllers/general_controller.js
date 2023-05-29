@@ -1,5 +1,5 @@
 import dayjs  from 'dayjs';
-import { escuelasQuery, campanias } from '../models/general_model.js';
+import { escuelasQuery, campanias, insertProspecto } from '../models/general_model.js';
 
 const formRegistrarProspecto = async(req, res) => {
     
@@ -18,11 +18,33 @@ const formRegistrarProspecto = async(req, res) => {
 }
 
 
-const guardarProspecto = (req, res) => {
+const guardarProspecto = async(req, res) => {
 
-    let { primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, curp, dir_casa, celular, rfc, codigo_postal, escuela, medios, cc_experience, campania, turno, modalidad, horas_laborales, bono, fecha_ingreso, asesor_padrino, observaciones } = req.body;
+    //formateos
+    req.body.horas_laborales = parseInt(req.body.horas_laborales);
+    req.body.estatus = parseInt(req.body.estatus);
     
-    //validar si existe el prospecto que se esta ingresando
+    //validar si existe el prospecto que se esta ingresando PENDIENTE QUE HAGAS
+    
+    let prospecto = req.body;
+
+    for (let clave in prospecto) {
+
+        if (typeof prospecto[clave] === 'string') {
+
+          prospecto[clave] = prospecto[clave].trim();
+        }
+    }
+
+    let result = await insertProspecto(prospecto); //res e int
+
+    //validar resultado
+    if( result === 1 ) {
+        res.json({ result });
+    }
+    else {
+        res.json({ result: 0 });
+    }
 }
 
     
