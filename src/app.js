@@ -11,7 +11,7 @@ dotenv.config({ path: '.env' });
 const app = express();
 
 app.use(session({
-    secret: process.env.SECRET_SESSION,
+    secret: 'secret',
     resave: false,
     saveUninitialized: true
 }));
