@@ -2,7 +2,7 @@
 <body>
         <%- include('../views/seccionesHTML/menu.ejs'); %>
     
-        <form class="column is-11 box m-6" action="">
+        <form class="column is-11 box m-6" id="registrar-prospecto">
 
             <div class="columns has-text-centered is-flex">
 
@@ -24,7 +24,7 @@
                     <span>Fecha Registro: </span><strong id="fecha_solicitud"><%= hoy %></strong>
                   </div>
                 </div>
-              </div>
+            </div>
               
             <div class="divider is-info">datos personales</div>
 
@@ -33,19 +33,19 @@
             <div class="columns is-justify-content-center is-align-items-center">
                 <div class="column is-2">
                     <label class="label" for="primer_nombre">Primer nombre</label>
-                    <input class="input is-small" type="text" name="primer_nombre" id="primer_nombre" maxlength="30" placeholder="Ej. Alejandro">
+                    <input class="input is-small" type="text" name="primer_nombre" id="primer_nombre" maxlength="30" placeholder="Ej. Alejandro" required>
                 </div>
                 <div class="column is-2">
                     <label class="label" for="segundo_nombre">Segundo Nombre</label>
-                    <input class="input is-small" type="text" name="segundo_nombre" id="segundo_nombre" maxlength="30" placeholder="Ej. de Jesus">
+                    <input class="input is-small" type="text" name="segundo_nombre" id="segundo_nombre" maxlength="30" placeholder="Ej. de Jesus" required>
                 </div>
                 <div class="column is-2">
                     <label class="label" for="primer_apellido">Apellido Paterno</label>
-                    <input class="input is-small" type="text" name="primer_apellido" id="primer_apellido" maxlength="30" placeholder="Ej. Ihuit">
+                    <input class="input is-small" type="text" name="primer_apellido" id="primer_apellido" maxlength="30" placeholder="Ej. Ihuit" required>
                 </div>
                 <div class="column is-2">
                     <label class="label" for="apellido_paterno">Apellido Materno</label>
-                    <input class="input is-small" type="text" name="segundo_apellido" id="segundo_apellido" maxlength="30" placeholder="Ej. Herrera">
+                    <input class="input is-small" type="text" name="segundo_apellido" id="segundo_apellido" maxlength="30" placeholder="Ej. Herrera" required>
                 </div>
                 <div class="column is-2">
                     <label class="label" for="fecha_nacimiento">Fecha Nacimiento</label>
@@ -131,7 +131,7 @@
                 <div class="column is-4">
                     <label class="label" for="campania">Campaña de Interés</label>
                     <div class="select is-small is-fullwidth">
-                        <select name="campania" id="campania">
+                        <select name="campania" id="campania" required>
                             <option value="-" disabled="" selected="">Selecciona...</option>
                             <% campanias.forEach( item => { %>
                                 <option value="<%= item.nombre_campania %>"><%= item.nombre_campania %></option>
@@ -143,7 +143,7 @@
                 <div class="column is-2">
                     <label class="label" for="turno">Turno</label>
                     <div class="select is-small is-fullwidth">
-                        <select name="turno" id="turno">
+                        <select name="turno" id="turno" required>
                             <option value="Matutino">Matutino</option>
                             <option value="Verpertino">Vespertino</option>
                         </select>
@@ -177,7 +177,7 @@
 
                 <div class="column is-2">
                     <label for="fecha_ingreso" class="label">Fecha Ingreso</label>
-                    <input class="input is-small" type="date" name="fecha_ingreso" id="fecha_ingreso" class="fecha_ingreso">
+                    <input class="input is-small" type="date" name="fecha_ingreso" id="fecha_ingreso" class="fecha_ingreso" required>
                 </div>
 
                 <div class="column is-3">
@@ -199,16 +199,15 @@
             </div>
             <div class="levels">
                 <div class="level-right">
-                    <button class="button is-success" id="registrar-prospecto" onclick="registrarProspecto(); return false;">REGISTRAR PROSPECTO</button>
+                    <button class="button is-success" id="registrar-prospecto" onclick="guardarProspecto(); return false;">REGISTRAR PROSPECTO</button>
                 </div>
             </div>
 
         </form>
 
         <script type="text/javascript">
-            
-
-            function registrarProspecto() { 
+        
+            function guardarProspecto() { //tomar datos y enviarlos a la base
                 Swal.fire({
                     title: '¿Guardar Registro?',
                     text: 'Antes de guardar, verifica que hayas llenado todos los campos correspondientes, y, que la información esté debidamente ingresada/escrita.',
@@ -221,10 +220,52 @@
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {
 
-                        //hacer envio de ajax
                         
+                        //tomar los campos requeridos para validar
+                        let primer_nombre = document.getElementById('primer_nombre').value;
+                        let primer_apellido = document.getElementById('primer_apellido').value;
+                        let segundo_apellido = document.getElementById('segundo_apellido').value;
 
-                        Swal.fire('Se ha guardado la información', '', 'success')
+                        let campania = document.getElementById('campania');
+
+                        if( primer_nombre.length === 0 || primer_apellido.length === 0 || segundo_apellido.length === 0 ) {
+                            return Swal.fire('El primer nombre y apellidos, son información requerida, valídalos.');
+                        }
+
+                        if( campania.value === '-' ) {
+
+                            campania.setAttribute("class", "select is-small is-fullwidth has-background-danger");
+                            return Swal.fire('Selecciona una campaña');
+
+                        }
+                        
+                        //tomar el elemento
+                        const formulario = document.getElementById('registrar-prospecto');
+
+                        const prospectoDatos = {};
+
+                        const formData = new FormData(formulario);
+
+                        for( let pair of formData.entries() ) {
+                            prospectoDatos[pair[0]] = pair[1];
+                        }
+
+
+                        $.ajax({
+                            url: '/guardarProspecto',
+                            type: 'POST',
+                            data: prospectoDatos,
+                            beforeSend: () => {
+
+                            },
+                            success: (res) => {
+
+                            }
+
+                        })
+
+                        console.log(formData)
+                        // Swal.fire('Se ha guardado la información', '', 'success')
                     } 
                 })
 
