@@ -119,7 +119,7 @@
                 <div class="column is-3">
                     <div>
                         <label class="label" for="cc_experience">¿En cuál fué?</label>
-                        <input id="experiencia_cc" class="input is-small" type="text" name="cc_experience" id="cc_experience" placeholder="Escribe el nombre del Call Center" disabled>
+                        <input class="input is-small" type="text" name="cc_experience" id="cc_experience" placeholder="Marca la casilla para habilitar..." disabled>
                     </div>
                     
                     <label class="mt-1 checkbox is-flex is-align-content-center" id="check_cc">
@@ -208,21 +208,25 @@
         <script type="text/javascript">
             
 
-            function registrarProspecto() {
+            function registrarProspecto() { 
                 Swal.fire({
-                title: 'Do you want to save the changes?',
-                showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: 'Save',
-                denyButtonText: `Don't save`,
-                }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    Swal.fire('Saved!', '', 'success')
-                } else if (result.isDenied) {
-                    Swal.fire('Changes are not saved', '', 'info')
-                }
-            })
+                    title: '¿Guardar Registro?',
+                    text: 'Antes de guardar, verifica que hayas llenado todos los campos correspondientes, y, que la información esté debidamente ingresada/escrita.',
+                    // showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'He verificado',
+                    cancelButtonText: 'Verificar de Nuevo'
+                })
+                .then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+
+                        //hacer envio de ajax
+                        
+
+                        Swal.fire('Se ha guardado la información', '', 'success')
+                    } 
+                })
 
             }
 
@@ -231,13 +235,14 @@
             function validarCheck() {
 
                 const chkbx = document.getElementById('exp_check');
-                const campoExpCC = document.getElementById('experiencia_cc');
+                const campoExpCC = document.getElementById('cc_experience');
 
                 if( chkbx.checked ) {
+                    campoExpCC.placeholder = 'Escribe el nombre del CC';                    
                     campoExpCC.disabled = false;
                 }
                 else {
-                    chkbx.placeholder = 'Marca la casilla para habilitar';
+                    campoExpCC.placeholder = 'Marca la casilla para habilitar el campo...';
                     campoExpCC.disabled = true;
                 }
             }
