@@ -64,7 +64,7 @@
                 </div>
                 <div class="column is-2">
                     <label class="label" for="celular">N°. Telefónico</label>
-                    <input class="input is-small" type="text" name="celular" id="celular" tabindex="8" placeholder="A 10 dígitos">
+                    <input class="input is-small" type="text" name="celular" id="celular" placeholder="A 10 dígitos" onkeypress="return onlyNumbers(event);" maxlength="13">
                 </div>
                 <div class="column is-2">
                     <label class="label" for="rfc"><abbr title="Clave del RFC a 13 posiciones si es persona física o 12 posiciones si es persona moral, si se trata de contribuyentes. En caso de no contribuyentes, el RFC deberá de cubrir las 13 posiciones por lo que deberán solicitar a la institución de crédito agregar tres ceros al final de dicho campo.">RFC</abbr></label>
@@ -166,12 +166,12 @@
 
                 <div class="column is-2">
                     <label class="label" for="modalidad">Jornada Laboral</label>
-                    <input class="input is-small" type="number" name="horas_laborales" id="horas_laborales" placeholder="Solo número: 4, 6 o 8 horas">
+                    <input class="input is-small" type="text" name="horas_laborales" id="horas_laborales" placeholder="Solo número: 4, 6 o 8 horas" onkeypress="return onlyNumbers(event);" maxlength="2">
                 </div>
 
                 <div class="column is-3">
                     <label class="label" for="bono">Bono</label>
-                    <input class="input is-small" type="text" name="bono" id="bono" placeholder="Escribe el bono correspondiente">
+                    <input class="input is-small" type="text" name="bono" id="bono" placeholder="Escribe el bono correspondiente" maxlength="50">
                 </div>
 
 
@@ -197,13 +197,37 @@
                     </div>
                 </div>
             </div>
+            <div class="levels">
+                <div class="level-right">
+                    <button class="button is-success" id="registrar-prospecto" onclick="registrarProspecto(); return false;">REGISTRAR PROSPECTO</button>
+                </div>
+            </div>
 
         </form>
 
         <script type="text/javascript">
             
 
-            //MIS FUNCIONES DE VALIDACION
+            function registrarProspecto() {
+                Swal.fire({
+                title: 'Do you want to save the changes?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                denyButtonText: `Don't save`,
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire('Saved!', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
+            })
+
+            }
+
+
+            //MIS FUNCIONES DE VALIDACION (USO function normal porque admite el hoisting)
             function validarCheck() {
 
                 const chkbx = document.getElementById('exp_check');
@@ -219,6 +243,7 @@
             }
 
             function onlyNumbers (evt) {
+
                 //Lo llamamons mediante el evento event en la ventana
                 evt = (evt) ? evt : window.event;
 
@@ -229,10 +254,10 @@
                     // console.log('NUMEROS')
                     return true;
                 }
-                    else {
+                else {
                     // console.log('NO NUMEROS')
                     return false;
-                    }
+                }
             }
 
         </script>
