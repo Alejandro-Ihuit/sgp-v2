@@ -2,65 +2,81 @@
 <body>
         <%- include('../views/seccionesHTML/menu.ejs'); %>
     
-        <form class="container box m-6" action="">
-            <div class="has-text-centered is-flex">
-                <div class="column is-9  is-align-content-center">
+        <form class="column is-11 box m-6" action="">
+
+            <div class="columns has-text-centered is-flex">
+
+                <div class="column is-12 is-align-content-center">
                     <h4 class="title is-4">Registro de Nuevo Prospecto</h4>
                 </div>
-                <div class="column is-3 is-flex is-align-items-end">
-                    <span class="   notification" id="fecha-alta">Fecha Registro: <%= hoy %></span>
-                </div>
             </div>
-            <div class="divider">datos personales</div>
+
+            <div class="level">
+                <div class="level-left">
+                  <div class="column notification">
+                    <!-- Contenido del div izquierdo -->
+                    <strong>Recluta: </strong><span><%= session.nombre_completo %></span>
+                  </div>
+                </div>
+                <div class="level-right">
+                  <div class="column notification">
+                    <!-- Contenido del div derecho -->
+                    <span>Fecha Registro: </span><strong id="fecha_solicitud"><%= hoy %></strong>
+                  </div>
+                </div>
+              </div>
+              
+            <div class="divider is-info">datos personales</div>
+
             <div class="columns">
             </div>
             <div class="columns is-justify-content-center is-align-items-center">
                 <div class="column is-2">
                     <label class="label" for="primer_nombre">Primer nombre</label>
-                    <input class="input is-small" type="text" name="primer_nombre" id="primer_nombre" tabindex="1" maxlength="30" placeholder="Ej. Alejandro">
+                    <input class="input is-small" type="text" name="primer_nombre" id="primer_nombre" maxlength="30" placeholder="Ej. Alejandro">
                 </div>
                 <div class="column is-2">
                     <label class="label" for="segundo_nombre">Segundo Nombre</label>
-                    <input class="input is-small" type="text" name="segundo_nombre" id="segundo_nombre" tabindex="2" maxlength="30" placeholder="Ej. de Jesus">
+                    <input class="input is-small" type="text" name="segundo_nombre" id="segundo_nombre" maxlength="30" placeholder="Ej. de Jesus">
                 </div>
                 <div class="column is-2">
                     <label class="label" for="primer_apellido">Apellido Paterno</label>
-                    <input class="input is-small" type="text" name="primer_apellido" id="primer_apellido" tabindex="3" maxlength="30" placeholder="Ej. Ihuit">
+                    <input class="input is-small" type="text" name="primer_apellido" id="primer_apellido" maxlength="30" placeholder="Ej. Ihuit">
                 </div>
                 <div class="column is-2">
                     <label class="label" for="apellido_paterno">Apellido Materno</label>
-                    <input class="input is-small" type="text" name="segundo_apellido" id="segundo_apellido" tabindex="4" maxlength="30" placeholder="Ej. Herrera">
+                    <input class="input is-small" type="text" name="segundo_apellido" id="segundo_apellido" maxlength="30" placeholder="Ej. Herrera">
                 </div>
                 <div class="column is-2">
                     <label class="label" for="fecha_nacimiento">Fecha Nacimiento</label>
-                    <input class="input is is-small" type="date" name="fecha_nacimiento" id="fecha_nacimiento" tabindex="5">
+                    <input class="input is is-small" type="date" name="fecha_nacimiento" id="fecha_nacimiento">
                 </div>
                 <div class="column is-2">
                     <label class="label" for="curp">CURP</label>
-                    <input class="input is-small" type="text" name="curp" id="curp" tabindex="6" maxlength="18" placeholder="A 18 caracteres">
+                    <input class="input is-small" type="text" name="curp" id="curp" maxlength="18" placeholder="A 18 caracteres">
                 </div>
             </div>
 
             <div class="columns">
                 <div class="column is-4">
                     <label class="label" for="dir_casa">Domicilio</label>
-                    <input class="input is-small" type="text" name="dir_casa" id="dir_casa" tabindex="7" maxlength="150" placeholder="Ej. C. 70 x 20 y 22 #556B Col. Montecristo">
+                    <input class="input is-small" type="text" name="dir_casa" id="dir_casa" maxlength="150" placeholder="Ej. C. 70 x 20 y 22 #556B Col. Montecristo">
                 </div>
                 <div class="column is-2">
                     <label class="label" for="celular">N°. Telefónico</label>
-                    <input class="input is-small" type="text" name="celular" id="celular" maxlength="10" tabindex="8" placeholder="A 10 dígitos">
+                    <input class="input is-small" type="text" name="celular" id="celular" tabindex="8" placeholder="A 10 dígitos">
                 </div>
                 <div class="column is-2">
                     <label class="label" for="rfc"><abbr title="Clave del RFC a 13 posiciones si es persona física o 12 posiciones si es persona moral, si se trata de contribuyentes. En caso de no contribuyentes, el RFC deberá de cubrir las 13 posiciones por lo que deberán solicitar a la institución de crédito agregar tres ceros al final de dicho campo.">RFC</abbr></label>
-                    <input class="input is-small" type="text" name="rfc" id="rfc" maxlength="15" tabindex="9" placeholder="">
+                    <input class="input is-small" type="text" name="rfc" id="rfc" maxlength="15" placeholder="">
                 </div>
                 <div class="column is-2">
                     <label class="label" for="codigo_postal">Código Postal</label>
-                    <input class="input is-small" type="text" name="codigo_postal" id="codigo_postal" maxlength="10" tabindex="10" placeholder="Ej. 97000">
+                    <input class="input is-small" type="text" name="codigo_postal" id="codigo_postal" maxlength="10" placeholder="Ej. 97000">
                 </div>
                 <div class="column is-2">
                     <label class="label" for="escuela">Escuela</label>
-                    <input class="input is-small" list="escuelas" type="text" name="escuela" id="escuela" maxlength="100" tabindex="11" title="Si la escuela no está en la lista, escríbela...">
+                    <input class="input is-small" list="escuelas" type="text" name="escuela" id="escuela" maxlength="100"  title="Si la escuela no está en la lista, escríbela...">
                     <datalist id="escuelas" style="width: 300px;">
                         <% resultadoEscuelas.forEach( item => {  %>
                             <option value="<%= item.escuela %>">
@@ -69,7 +85,7 @@
                 </div>
             </div>
 
-            <div class="divider">DATOS LABORALES</div>
+            <div class="divider is-info">DATOS LABORALES</div>
 
             <div class="columns">
 
@@ -133,14 +149,61 @@
                         </select>
                     </div>
                 </div>
-                
+
+            </div>
+
+            <div class="columns">
+
+                <div class="column is-2">
+                    <label class="label" for="modalidad">Modalidad</label>
+                    <div class="select is-small is-fullwidth">
+                        <select name="modalidad" id="modalidad">
+                            <option value="presencial">PRESENCIAL</option>
+                            <option value="home office">HOME OFFICE</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="column is-2">
+                    <label class="label" for="modalidad">Jornada Laboral</label>
+                    <input class="input is-small" type="number" name="horas_laborales" id="horas_laborales" placeholder="Solo número: 4, 6 o 8 horas">
+                </div>
+
+                <div class="column is-3">
+                    <label class="label" for="bono">Bono</label>
+                    <input class="input is-small" type="text" name="bono" id="bono" placeholder="Escribe el bono correspondiente">
+                </div>
+
+
+                <div class="column is-2">
+                    <label for="fecha_ingreso" class="label">Fecha Ingreso</label>
+                    <input class="input is-small" type="date" name="fecha_ingreso" id="fecha_ingreso" class="fecha_ingreso">
+                </div>
+
+                <div class="column is-3">
+                    <label aria-colspan="label" for="asesor_padrino" class="label">Asesor Padrino</label>
+                    <input class="input is-small" type="text" name="asesor_padrino" id="asesor_padrino" maxlength="50" placeholder="Escribe el nombre completo del padrino">
+                </div>
+
+            </div>
+
+            <div class="columns">
+                <div class="column is-12">
+                    <label class="label" for="observaciones">Observaciones</label>
+                    <div class="field">
+                        <div class="control">
+                            <textarea class="textarea is-small has-fixed-size" name="observaciones" id="observaciones" cols="30" rows="2" placeholder="Escribe las observaciones"></textarea>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </form>
 
-        <!-- <script src="js/reg_prospectos"></script> -->
         <script type="text/javascript">
             
+
+            //MIS FUNCIONES DE VALIDACION
             function validarCheck() {
 
                 const chkbx = document.getElementById('exp_check');
@@ -153,6 +216,23 @@
                     chkbx.placeholder = 'Marca la casilla para habilitar';
                     campoExpCC.disabled = true;
                 }
+            }
+
+            function onlyNumbers (evt) {
+                //Lo llamamons mediante el evento event en la ventana
+                evt = (evt) ? evt : window.event;
+
+                //Tomamos su valor del caracter en codigo ASCII, y se almacena para comparar.
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                    
+                if(charCode > 47 && charCode < 58) {
+                    // console.log('NUMEROS')
+                    return true;
+                }
+                    else {
+                    // console.log('NO NUMEROS')
+                    return false;
+                    }
             }
 
         </script>
