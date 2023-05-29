@@ -15,8 +15,19 @@ const formRegistrarProspecto = async(req, res) => {
             'resultadoEscuelas': resultadoEscuelas,
             'campanias': resultadoCampanias
         } );
-    }
+}
+
+
+const guardarProspecto = (req, res) => {
+
+    let { primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento, curp, dir_casa, celular, rfc, codigo_postal, escuela, medios, cc_experience, campania, turno, modalidad, horas_laborales, bono, fecha_ingreso, asesor_padrino, observaciones } = req.body;
+    
+    //validar si existe el prospecto que se esta ingresando
+}
+
+    
 
 export {
-    formRegistrarProspecto
+    formRegistrarProspecto,
+    guardarProspecto
 }
