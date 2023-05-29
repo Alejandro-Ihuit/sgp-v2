@@ -11,7 +11,8 @@ router.get('/', (req, res) => { //set the main page
 import { login, home }  from '../controllers/login.controller.js';
 	router.post('/login', login);
 	router.get('/home', home);
-import { formRegistrarProspecto } from '../controllers/general_controller.js';
+import { formRegistrarProspecto, guardarProspecto } from '../controllers/general_controller.js';
 	router.get('/registrarProspecto', formRegistrarProspecto);
+	router.post('/guardarProspecto', guardarProspecto);
 
 export default router;
