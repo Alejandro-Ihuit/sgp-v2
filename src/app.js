@@ -4,9 +4,8 @@ import morgan from 'morgan';
 
 import rutas from './routes/rutas.js';
 import session from 'express-session';
-import dotenv from 'dotenv';
 
-dotenv.config({ path: '.env' });
+//comentario 
 
 const app = express();
 
