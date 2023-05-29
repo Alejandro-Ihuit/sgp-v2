@@ -8,7 +8,7 @@ import session from 'express-session';
 const app = express();
 
 app.use(session({
-    secret: process.env.SECRET_SESSION,
+    secret: 'secret',
     resave: false,
     saveUninitialized: true
 }));
