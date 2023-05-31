@@ -59,8 +59,12 @@ const verProspectos = async(req, res) => {
 }
 
 const verInformacionProspecto = async(req, res) => {
-    let informacionProspecto = await prospectosQuery(req.body.id_prospecto);
-    res.render('modals/modalProspecto', {informacionProspecto})
+    try {
+        let verInformacionProspecto = await informacionProspecto(req.body.id_prospecto);
+        res.render('modals/modalProspecto', {verInformacionProspecto})
+    } catch (error) {
+        console.log('Error: No se encontro informacion del personal')
+    }
 }
 
 export {
