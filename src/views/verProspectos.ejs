@@ -41,15 +41,14 @@
                 </tbody>
             </table>
         </div>
-        <div class="modal is-8" id="modalProspecto">
-            <div class="modal-background"></div>
-            <div class="modal-content is-8" id="contenidoModalProspecto"></div>
-            <button id="cerrarModalProspecto" class="modal-close is-large" aria-label="close"></button>
+        <div class="modal" id="modalProspecto">
+            <div onclick="cerrarModalProspecto(); return false" class="modal-background"></div>
+            <div class="modal-content custom-modal-content-width" id="contenidoModalProspecto"></div>
+            <button onclick="cerrarModalProspecto(); return false" class="modal-close is-large" aria-label="close"></button>
         </div>
         <script type="text/javascript">
             const modalProspecto = document.querySelector("#modalProspecto")
             const contenidoModalProspecto = document.querySelector("#contenidoModalProspecto")
-            const cerrarModalProspecto = document.querySelector("#cerrarModalProspecto")
             function verProspecto(id_prospecto){
                 $.ajax({
                     url: "/modalProspecto",
@@ -62,9 +61,9 @@
                 })
             }
 
-            cerrarModalProspecto.addEventListener('click', function(){
-                modalProspecto.classList.remove('is-active');
-            });
+            function cerrarModalProspecto(){
+                modalProspecto.classList.remove('is-active')
+            };
 
         </script>
 </body>
