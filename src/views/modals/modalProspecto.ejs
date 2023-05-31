@@ -3,7 +3,7 @@
     <div class="columns has-text-centered is-flex">
 
         <div class="column is-12 is-align-content-center">
-            <h4 class="title is-4">Nombre completo</h4>
+            <h4 class="title is-4">Informacion de prospecto</h4>
         </div>
     </div>
     <div class="divider is-info">DATOS PERSONALES</div>
@@ -13,50 +13,50 @@
     <div class="columns is-justify-content-center is-align-items-center">
         <div class="column is-2">
             <label class="label" for="primer_nombre">Primer nombre</label>
-            <input class="input is-small" type="text" name="primer_nombre" id="primer_nombre" maxlength="30" placeholder="Ej. Alejandro" required>
+            <input class="input is-small" type="text" name="primer_nombre" id="primer_nombre" maxlength="30" value="<%= verInformacionProspecto[0].primer_nombre %>" required>
         </div>
         <div class="column is-2">
             <label class="label" for="segundo_nombre">Segundo Nombre</label>
-            <input class="input is-small" type="text" name="segundo_nombre" id="segundo_nombre" maxlength="30" placeholder="Ej. de Jesus" required>
+            <input class="input is-small" type="text" name="segundo_nombre" id="segundo_nombre" maxlength="30" value="<%= verInformacionProspecto[0].segundo_nombre %>" required>
         </div>
         <div class="column is-2">
             <label class="label" for="primer_apellido">Apellido Paterno</label>
-            <input class="input is-small" type="text" name="primer_apellido" id="primer_apellido" maxlength="30" placeholder="Ej. Ihuit" required>
+            <input class="input is-small" type="text" name="primer_apellido" id="primer_apellido" maxlength="30" value="<%= verInformacionProspecto[0].primer_apellido %>" required>
         </div>
         <div class="column is-2">
             <label class="label" for="apellido_paterno">Apellido Materno</label>
-            <input class="input is-small" type="text" name="segundo_apellido" id="segundo_apellido" maxlength="30" placeholder="Ej. Herrera" required>
+            <input class="input is-small" type="text" name="segundo_apellido" id="segundo_apellido" maxlength="30" value="<%= verInformacionProspecto[0].segundo_apellido %>" required>
         </div>
         <div class="column is-2">
             <label class="label" for="fecha_nacimiento">Fecha Nacimiento</label>
-            <input class="input is is-small" type="date" name="fecha_nacimiento" id="fecha_nacimiento">
+            <input class="input is is-small" type="text" name="fecha_nacimiento" id="fecha_nacimiento" value="<%= verInformacionProspecto[0].fecha_nacimiento %>">
         </div>
         <div class="column is-2">
             <label class="label" for="curp">CURP</label>
-            <input class="input is-small" type="text" name="curp" id="curp" maxlength="18" placeholder="A 18 caracteres">
+            <input class="input is-small" type="text" name="curp" id="curp" maxlength="18" value="<%= verInformacionProspecto[0].curp %>">
         </div>
     </div>
 
     <div class="columns">
         <div class="column is-4">
             <label class="label" for="dir_casa">Domicilio</label>
-            <input class="input is-small" type="text" name="dir_casa" id="dir_casa" maxlength="150" placeholder="Ej. C. 70 x 20 y 22 #556B Col. Montecristo">
+            <input class="input is-small" type="text" name="dir_casa" id="dir_casa" maxlength="150" value="<%= verInformacionProspecto[0].dir_casa %>">
         </div>
         <div class="column is-2">
             <label class="label" for="celular">N°. Telefónico</label>
-            <input class="input is-small" type="text" name="celular" id="celular" placeholder="A 10 dígitos" onkeypress="return onlyNumbers(event);" maxlength="13">
+            <input class="input is-small" type="text" name="celular" id="celular" value="<%= verInformacionProspecto[0].celular %>" onkeypress="return onlyNumbers(event);" maxlength="13">
         </div>
         <div class="column is-2">
             <label class="label" for="rfc"><abbr title="Clave del RFC a 13 posiciones si es persona física o 12 posiciones si es persona moral, si se trata de contribuyentes. En caso de no contribuyentes, el RFC deberá de cubrir las 13 posiciones por lo que deberán solicitar a la institución de crédito agregar tres ceros al final de dicho campo.">RFC</abbr></label>
-            <input class="input is-small" type="text" name="rfc" id="rfc" maxlength="15" placeholder="">
+            <input class="input is-small" type="text" name="rfc" id="rfc" maxlength="15" value="<%= verInformacionProspecto[0].rfc %>">
         </div>
         <div class="column is-2">
             <label class="label" for="codigo_postal">Código Postal</label>
-            <input class="input is-small" type="text" name="codigo_postal" id="codigo_postal" maxlength="10" placeholder="Ej. 97000">
+            <input class="input is-small" type="text" name="codigo_postal" id="codigo_postal" maxlength="10" value="<%= verInformacionProspecto[0].codigo_postal %>">
         </div>
         <div class="column is-2">
             <label class="label" for="escuela">Escuela</label>
-            <input class="input is-small" list="escuelas" type="text" name="escuela" id="escuela" maxlength="100"  title="Si la escuela no está en la lista, escríbela...">
+            <input class="input is-small" list="escuelas" type="text" name="escuela" id="escuela" maxlength="100"  value="<%= verInformacionProspecto[0].escuela %>">
             <datalist id="escuelas" style="width: 300px;">
             </datalist>
         </div>
@@ -70,7 +70,7 @@
             <label class="label" for="enterado_vacante">¿Cómo se enteró de la vacante?</label>
             <div class="select is-small is-fullwidth">
                 <select name="medios" id="medioss">
-                    <option value="-" disabled="" selected="">Selecciona...</option>
+                    <option value="-" disabled="" selected="<%= verInformacionProspecto[0].medios %>"><%= verInformacionProspecto[0].medios %></option>
                     <option value="ASESOR PADRINO">ASESOR PADRINO</option>
                     <option value="FACEBOOK">FACEBOOK</option>
                     <option value="INSTAGRAM">INSTAGRAM</option>
@@ -96,7 +96,7 @@
         <div class="column is-3">
             <div>
                 <label class="label" for="cc_experience">¿En cuál fué?</label>
-                <input class="input is-small" type="text" name="cc_experience" id="cc_experience" value="ninguno" placeholder="Marca la casilla para habilitar..." disabled>
+                <input class="input is-small" type="text" name="cc_experience" id="cc_experience" value="<%= verInformacionProspecto[0].cc_experience %>" placeholder="Marca la casilla para habilitar..." disabled>
             </div>
             
             <label class="mt-1 checkbox is-flex is-align-content-center" id="check_cc">
@@ -109,7 +109,7 @@
             <label class="label" for="campania">Campaña de Interés</label>
             <div class="select is-small is-fullwidth">
                 <select name="campania" id="campania" required>
-                    <option value="-" disabled="" selected="">Selecciona...</option>
+                    <option value="-" disabled="" selected="<%= verInformacionProspecto[0].campania %>"><%= verInformacionProspecto[0].campania %></option>
                 </select>
             </div>
         </div>
@@ -118,6 +118,7 @@
             <label class="label" for="turno">Turno</label>
             <div class="select is-small is-fullwidth">
                 <select name="turno" id="turno" required>
+                    <option value="<%= verInformacionProspecto[0].turno %>"><%= verInformacionProspecto[0].turno %></option>
                     <option value="Matutino">Matutino</option>
                     <option value="Verpertino">Vespertino</option>
                 </select>
@@ -132,6 +133,7 @@
             <label class="label" for="modalidad">Modalidad</label>
             <div class="select is-small is-fullwidth">
                 <select name="modalidad" id="modalidad">
+                    <option value="<%= verInformacionProspecto[0].modalidad %>"><%= verInformacionProspecto[0].modalidad %></option>
                     <option value="presencial">PRESENCIAL</option>
                     <option value="home office">HOME OFFICE</option>
                 </select>
@@ -140,23 +142,23 @@
 
         <div class="column is-2">
             <label class="label" for="modalidad">Jornada Laboral</label>
-            <input class="input is-small" type="text" name="horas_laborales" id="horas_laborales" placeholder="Solo número: 4, 6 o 8 horas" onkeypress="return onlyNumbers(event);" maxlength="2">
+            <input class="input is-small" type="text" name="horas_laborales" id="horas_laborales" value="<%= verInformacionProspecto[0].horas_laborales %>" onkeypress="return onlyNumbers(event);" maxlength="2">
         </div>
 
         <div class="column is-3">
             <label class="label" for="bono">Bono</label>
-            <input class="input is-small" type="text" name="bono" id="bono" placeholder="Escribe el bono correspondiente" maxlength="50">
+            <input class="input is-small" type="text" name="bono" id="bono" value="<%= verInformacionProspecto[0].bono %>" maxlength="50">
         </div>
 
 
         <div class="column is-2">
             <label for="fecha_ingreso" class="label">Fecha Ingreso</label>
-            <input class="input is-small" type="date" name="fecha_ingreso" id="fecha_ingreso" class="fecha_ingreso" required>
+            <input class="input is-small" type="date" name="fecha_ingreso" id="fecha_ingreso" class="fecha_ingreso" value="<%= verInformacionProspecto[0].fecha_ingreso %>" required>
         </div>
 
         <div class="column is-3">
             <label aria-colspan="label" for="asesor_padrino" class="label">Asesor Padrino</label>
-            <input class="input is-small" type="text" name="asesor_padrino" id="asesor_padrino" maxlength="50" placeholder="Escribe el nombre completo del padrino">
+            <input class="input is-small" type="text" name="asesor_padrino" id="asesor_padrino" maxlength="50" value="<%= verInformacionProspecto[0].asesor_padrino %>">
         </div>
 
     </div>
@@ -166,7 +168,7 @@
             <label class="label" for="observaciones">Observaciones</label>
             <div class="field">
                 <div class="control">
-                    <textarea class="textarea is-small has-fixed-size" name="observaciones" id="observaciones" cols="30" rows="2" placeholder="Escribe las observaciones"></textarea>
+                    <textarea class="textarea is-small has-fixed-size" name="observaciones" id="observaciones" cols="30" rows="2" value="<%= verInformacionProspecto[0].observaciones %>"></textarea>
                 </div>
             </div>
         </div>
@@ -178,3 +180,20 @@
     </div>
 
 </form>
+
+<script type="text/javascript">
+    function validarCheck() {
+        const chkbx = document.getElementById('exp_check');
+        const campoExpCC = document.getElementById('cc_experience');
+
+        if( chkbx.checked ) {
+            campoExpCC.value = '';                    
+            campoExpCC.placeholder = 'Escribe el nombre del CC';                    
+            campoExpCC.removeAttribute("disabled");
+        }
+        else {
+            campoExpCC.value = 'ninguno';
+            campoExpCC.disabled = true;
+        }
+    }
+</script>
