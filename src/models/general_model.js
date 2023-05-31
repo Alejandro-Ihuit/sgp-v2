@@ -36,6 +36,7 @@ const informacionProspecto = async(id_prospecto) => {
                 FROM sgp.prospectos as p inner join sgp.estatus as e on p.estatus = e.id_status
                 WHERE p.estatus = 0 and p.id_prospecto = '${id_prospecto}'
                 order by id_prospecto asc;`
+    return await select(query);
 }
 export {
     escuelasQuery,
