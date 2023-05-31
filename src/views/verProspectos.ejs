@@ -1,0 +1,70 @@
+<%- include('../views/seccionesHTML/head.ejs');%>
+<body>
+        <%- include('../views/seccionesHTML/menu.ejs'); %>
+        <div>
+            <table class="table is-hoverable is-fullwidth">
+                <thead>
+                    <tr>
+                        <th><abbr title="primer nombre">Primer nombre</abbr></th>
+                        <th><abbr title="segundo nombre">Segundo nombre</abbr></th>
+                        <th><abbr title="primer apellido">Primer apellido</abbr></th>
+                        <th><abbr title="segundo apellido">Segundo apellido</abbr></th>
+                        <th><abbr title="telefono">Telefono</abbr></th>
+                        <th><abbr title="status">Status</abbr></th>
+                        <th><abbr title="accion"></abbr></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th><abbr title="primer nombre">Primer nombre</abbr></th>
+                        <th><abbr title="segundo nombre">Segundo nombre</abbr></th>
+                        <th><abbr title="primer apellido">Primer apellido</abbr></th>
+                        <th><abbr title="segundo apellido">Segundo apellido</abbr></th>
+                        <th><abbr title="telefono">Telefono</abbr></th>
+                        <th><abbr title="status">Status</abbr></th>
+                        <th><abbr title="accion"></abbr></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                <% tablaProspectos.forEach((item) => { %>
+                    <tr>
+                        <p hidden id="id_prospecto"><%= item.id_prospecto %></p>
+                        <td><%= item.primer_nombre %></td>
+                        <td><%= item.segundo_nombre %></td>
+                        <td><%= item.primer_apellido %></td>
+                        <td><%= item.segundo_apellido %></td>
+                        <td><%= item.celular %></td>
+                        <td><%= item.status %></td>
+                        <td><button onclick="verProspecto('<%= item.id_prospecto %>'); return false; " class="button is-primary" id="btn_verProspecto">Ver</button></td>
+                    </tr>
+                <% }); %>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal is-8" id="modalProspecto">
+            <div class="modal-background"></div>
+            <div class="modal-content is-8" id="contenidoModalProspecto"></div>
+            <button id="cerrarModalProspecto" class="modal-close is-large" aria-label="close"></button>
+        </div>
+        <script type="text/javascript">
+            const modalProspecto = document.querySelector("#modalProspecto")
+            const contenidoModalProspecto = document.querySelector("#contenidoModalProspecto")
+            const cerrarModalProspecto = document.querySelector("#cerrarModalProspecto")
+            function verProspecto(id_prospecto){
+                $.ajax({
+                    url: "/modalProspecto",
+                    type: "PUT",
+                    data: {id_prospecto},
+                    success: function(res){
+                        modalProspecto.classList.add('is-active')
+                        contenidoModalProspecto.innerHTML = res
+                    }
+                })
+            }
+
+            cerrarModalProspecto.addEventListener('click', function(){
+                modalProspecto.classList.remove('is-active');
+            });
+
+        </script>
+</body>
