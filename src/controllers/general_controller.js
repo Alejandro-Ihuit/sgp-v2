@@ -1,5 +1,5 @@
 import dayjs  from 'dayjs';
-import { escuelasQuery, campanias, insertProspecto } from '../models/general_model.js';
+import { escuelasQuery, campanias, insertProspecto, prospectosQuery, informacionProspecto } from '../models/general_model.js';
 
 const formRegistrarProspecto = async(req, res) => {
     
@@ -32,7 +32,7 @@ const guardarProspecto = async(req, res) => {
 
         if (typeof prospecto[clave] === 'string') {
 
-          prospecto[clave] = prospecto[clave].trim();
+            prospecto[clave] = prospecto[clave].trim();
         }
     }
 
@@ -47,9 +47,25 @@ const guardarProspecto = async(req, res) => {
     }
 }
 
+const verProspectos = async(req, res) => {
+
+    let resultadoProspectos = await prospectosQuery();
     
+    res.render('verProspectos',{
+        'title': 'Lista de prospectos', 
+        'iconName': 'asesor', 
+        'tablaProspectos': resultadoProspectos
+    })
+}
+
+const verInformacionProspecto = async(req, res) => {
+    let informacionProspecto = await prospectosQuery(req.body.id_prospecto);
+    res.render('modals/modalProspecto', {informacionProspecto})
+}
 
 export {
     formRegistrarProspecto,
-    guardarProspecto
+    guardarProspecto,
+    verProspectos,
+    verInformacionProspecto
 }
