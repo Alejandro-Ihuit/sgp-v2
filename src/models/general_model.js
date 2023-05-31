@@ -23,9 +23,24 @@ const insertProspecto = async(prospecto) => { //fala agregar los try cath
     return await insert(query);
 
 }
+const prospectosQuery = async() => {
+    let query = `SELECT p.id_prospecto, p.primer_nombre, p.segundo_nombre, p.primer_apellido, p.segundo_apellido, p.fecha_nacimiento, p.curp, p.rfc, p.celular, p.dir_casa, p.codigo_postal, p.cc_place, p.asesor_padrino, p.campania, p.turno, p.modalidad, p.horas_laborales, p.bono, p.fecha_ingreso, p.escuela, p.medios, p.reclutador, p.fecha_solicitud, e.estatus as status
+                FROM sgp.prospectos as p inner join sgp.estatus as e on p.estatus = e.id_status
+                WHERE p.estatus = 0
+                order by id_prospecto asc;`
+    return await select(query);
+}
 
+const informacionProspecto = async(id_prospecto) => {
+    let query = `SELECT p.id_prospecto, p.primer_nombre, p.segundo_nombre, p.primer_apellido, p.segundo_apellido, p.fecha_nacimiento, p.curp, p.rfc, p.celular, p.dir_casa, p.codigo_postal, p.cc_place, p.asesor_padrino, p.campania, p.turno, p.modalidad, p.horas_laborales, p.bono, p.fecha_ingreso, p.escuela, p.medios, p.reclutador, p.fecha_solicitud, e.estatus as status
+                FROM sgp.prospectos as p inner join sgp.estatus as e on p.estatus = e.id_status
+                WHERE p.estatus = 0 and p.id_prospecto = '${id_prospecto}'
+                order by id_prospecto asc;`
+}
 export {
     escuelasQuery,
     campanias,
-    insertProspecto
+    insertProspecto,
+    prospectosQuery,
+    informacionProspecto
 }
