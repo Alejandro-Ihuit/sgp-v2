@@ -16,3 +16,6 @@
     cursor: pointer;
 }
 
+.custom-modal-content-width{
+    width: 75%;
+}
