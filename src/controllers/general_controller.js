@@ -1,5 +1,5 @@
 import dayjs  from 'dayjs';
-import { escuelasQuery, campanias, insertProspecto, prospectosQuery, informacionProspecto } from '../models/general_model.js';
+import { escuelasQuery, campanias, insertProspecto, actualizacionDeProspecto, prospectosQuery, informacionProspecto, gruposCapa } from '../models/general_model.js';
 
 const formRegistrarProspecto = async(req, res) => {
     
@@ -16,7 +16,6 @@ const formRegistrarProspecto = async(req, res) => {
             'campanias': resultadoCampanias
         } );
 }
-
 
 const guardarProspecto = async(req, res) => {
 
@@ -47,10 +46,15 @@ const guardarProspecto = async(req, res) => {
     }
 }
 
+const actualizarProspecto = async(req, res) =>{
+    let actualizarProspecto = await actualizacionDeProspecto();
+    res.json({result});
+
+}
+
 const verProspectos = async(req, res) => {
 
     let resultadoProspectos = await prospectosQuery();
-    
     res.render('verProspectos',{
         'title': 'Lista de prospectos', 
         'iconName': 'asesor', 
@@ -59,17 +63,33 @@ const verProspectos = async(req, res) => {
 }
 
 const verInformacionProspecto = async(req, res) => {
-    try {
-        let verInformacionProspecto = await informacionProspecto(req.body.id_prospecto);
-        res.render('modals/modalProspecto', {verInformacionProspecto})
-    } catch (error) {
-        console.log('Error: No se encontro informacion del personal')
-    }
+    let verInformacionProspecto = await informacionProspecto(req.body.id_prospecto)
+    let resultadoCampanias = await campanias();
+    verInformacionProspecto.forEach(e => {
+        e.fecha_ingreso = e.fecha_ingreso.toJSON().slice(0,10)
+    });
+    res.render('modals/modalProspecto', {verInformacionProspecto, resultadoCampanias})
+}
+
+const cargarGruposCapa = async (req, res) => {
+    const verGruposCapa = await gruposCapa();
+    const idProspecto = req.body.idProspecto
+    const gruposFormateados = verGruposCapa.map(grupo => {
+    const fechaFormateada = new Date(grupo.fecha_inicio).toISOString().slice(0, 10);
+    return {
+        ...grupo,
+        fecha_inicio: fechaFormateada
+    };
+    });
+    
+    res.render('modals/modalGruposCapa', { verGruposCapa: gruposFormateados, 'idProspecto': idProspecto});
 }
 
 export {
+    verInformacionProspecto,
     formRegistrarProspecto,
+    actualizarProspecto,
     guardarProspecto,
-    verProspectos,
-    verInformacionProspecto
+    cargarGruposCapa,
+    verProspectos
 }
