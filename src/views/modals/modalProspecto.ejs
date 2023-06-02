@@ -1,16 +1,13 @@
-<form class="column is-12 box" id="registrar-prospecto">
+<form class="column is-12 box" name="actualizarInfo" id="actualizarInfo">
 
     <div class="columns has-text-centered is-flex">
-
-        <div class="column is-12 is-align-content-center">
-            <h4 class="title is-4">Informacion de prospecto</h4>
-        </div>
     </div>
     <div class="divider is-info">DATOS PERSONALES</div>
 
     <div class="columns">
     </div>
     <div class="columns is-justify-content-center is-align-items-center">
+        <label name="id_prospecto" id="id_prospecto" hidden><%= verInformacionProspecto[0].id_prospecto %></label>
         <div class="column is-2">
             <label class="label" for="primer_nombre">Primer nombre</label>
             <input class="input is-small" type="text" name="primer_nombre" id="primer_nombre" maxlength="30" value="<%= verInformacionProspecto[0].primer_nombre %>" required>
@@ -29,7 +26,7 @@
         </div>
         <div class="column is-2">
             <label class="label" for="fecha_nacimiento">Fecha Nacimiento</label>
-            <input class="input is is-small" type="text" name="fecha_nacimiento" id="fecha_nacimiento" value="<%= verInformacionProspecto[0].fecha_nacimiento %>">
+            <input class="input is is-small" type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="<%= verInformacionProspecto[0].fecha_nacimiento %>">
         </div>
         <div class="column is-2">
             <label class="label" for="curp">CURP</label>
@@ -70,7 +67,7 @@
             <label class="label" for="enterado_vacante">¿Cómo se enteró de la vacante?</label>
             <div class="select is-small is-fullwidth">
                 <select name="medios" id="medioss">
-                    <option value="-" disabled="" selected="<%= verInformacionProspecto[0].medios %>"><%= verInformacionProspecto[0].medios %></option>
+                    <option value="<%= verInformacionProspecto[0].medios %>" disabled="" selected="<%= verInformacionProspecto[0].medios %>"><%= verInformacionProspecto[0].medios %></option>
                     <option value="ASESOR PADRINO">ASESOR PADRINO</option>
                     <option value="FACEBOOK">FACEBOOK</option>
                     <option value="INSTAGRAM">INSTAGRAM</option>
@@ -93,12 +90,12 @@
             </div>
         </div>
 
+        
         <div class="column is-3">
             <div>
                 <label class="label" for="cc_experience">¿En cuál fué?</label>
-                <input class="input is-small" type="text" name="cc_experience" id="cc_experience" value="<%= verInformacionProspecto[0].cc_experience %>" placeholder="Marca la casilla para habilitar..." disabled>
+                    <input class="input is-small" type="text" name="cc_experience" id="cc_experience" disabled>
             </div>
-            
             <label class="mt-1 checkbox is-flex is-align-content-center" id="check_cc">
                 <input id="exp_check" type="checkbox" onclick="validarCheck();" >  
                 ¿Experiencia en Call Center?
@@ -110,6 +107,9 @@
             <div class="select is-small is-fullwidth">
                 <select name="campania" id="campania" required>
                     <option value="-" disabled="" selected="<%= verInformacionProspecto[0].campania %>"><%= verInformacionProspecto[0].campania %></option>
+                    <% resultadoCampanias.forEach( item => { %>
+                        <option value="<%= item.nombre_campania %>"><%= item.nombre_campania %></option>
+                    <% }); %>
                 </select>
             </div>
         </div>
@@ -153,7 +153,7 @@
 
         <div class="column is-2">
             <label for="fecha_ingreso" class="label">Fecha Ingreso</label>
-            <input class="input is-small" type="date" name="fecha_ingreso" id="fecha_ingreso" class="fecha_ingreso" value="<%= verInformacionProspecto[0].fecha_ingreso %>" required>
+            <input class="input is is-small" type="date" name="fecha_ingreso" id="fecha_ingreso" value="<%= verInformacionProspecto[0].fecha_ingreso %>">
         </div>
 
         <div class="column is-3">
@@ -175,25 +175,40 @@
     </div>
     <div class="levels">
         <div class="level-right">
-            <button class="button is-success" id="registrar-prospecto" onclick="guardarProspecto(); return false;">REGISTRAR PROSPECTO</button>
+            <button class="button is-success" id="btnActualizarProspecto" onclick="actualizarProspecto(); return false;">ACTUALIZAR PROSPECTO</button>
+            <button class="button is-success" id="ingresarCapacitacion" onclick="verGruposCapa(<%= verInformacionProspecto[0].id_prospecto %>); return false;" style="margin-left: 50px;">INGRESAR A CAPACITACION</button>
+            <button class="button is-success" id="scarCapacitacion" onclick="sacarCapacitacion(); return false;" style="margin-left: 50px;">SACAR DE CAPACITACION</button>
         </div>
     </div>
-
 </form>
 
-<script type="text/javascript">
-    function validarCheck() {
-        const chkbx = document.getElementById('exp_check');
-        const campoExpCC = document.getElementById('cc_experience');
+<div class="modal" name="modalGruposCapa" id="modalGruposCapa">
+    <div onclick="cerrarModalGruposCapa(); return false" class="modal-background"></div>
+    <div class="modal-content custom-modal-content-width-mediano" name="contenidoModalGruposCapa" id="contenidoModalGruposCapa"></div>
+    <button onclick="cerrarModalGruposCapa(); return false" class="modal-close is-large" aria-label="close"></button>
+</div>
 
-        if( chkbx.checked ) {
-            campoExpCC.value = '';                    
-            campoExpCC.placeholder = 'Escribe el nombre del CC';                    
-            campoExpCC.removeAttribute("disabled");
-        }
-        else {
-            campoExpCC.value = 'ninguno';
-            campoExpCC.disabled = true;
-        }
+<script type="text/javascript">
+    const modalGruposCapa = document.querySelector("#modalGruposCapa")
+    const contenidoModalGruposCapa = document.querySelector("#contenidoModalGruposCapa")
+
+    function verGruposCapa(idProspecto){
+        $.ajax({
+            url: "/modalGruposCapa",
+            type: "PUT",
+            data: {idProspecto},
+            success: function(res){
+                modalGruposCapa.classList.add('is-active')
+                contenidoModalGruposCapa.innerHTML = res
+            }
+        })
+    }
+
+    function actualizarProspecto(){
+        console.log("Entro a la funcion")
+        return;
+        const nuevosDatos = document.querySelector("#actualizarInfo");
+        var nuevosDatosProspecto = new FormData("nuevosDatos");
+        console.log(nuevosDatos);
     }
 </script>
