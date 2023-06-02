@@ -1,0 +1,58 @@
+<div class="" style="background-color: white;">
+    <br>
+    <div class="columns has-text-centered is-flex" >
+        <div class="column is-12 is-align-content-center">
+            <h4 class="title is-4">Grupos activos</h4>
+            <div hidden>
+                <h1><%= idProspecto %></h1>
+            </div>
+        </div>
+    </div>
+    <table class="table is-hoverable is-fullwidth ">
+        <thead>
+            <tr>
+                <th><abbr title="Grupo">Grupo</abbr></th>
+                <th><abbr title="Encargado">Encargado</abbr></th>
+                <th><abbr title="Fecha de inicio">Fecha de inicio</abbr></th>
+                <th class="has-text-centered"><abbr title="acciones"><button class="button is-primary" onclick="crearGrupoCapa()"> Crear grupo </button></abbr></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th><abbr title="Grupo">Grupo</abbr></th>
+                <th><abbr title="Encargado">Encargado</abbr></th>
+                <th><abbr title="Fecha de inicio">Fecha de inicio</abbr></th>
+                <th><abbr title="acciones"></abbr></th>
+            </tr>
+        </tfoot>
+        <tbody>
+        <% verGruposCapa.forEach((item) => { %>
+            <tr>
+                <td><%= item.id_capacitacion %></td>
+                <td><%= item.encargado %></td>
+                <td><%= item.fecha_inicio %></td>
+                <td>
+                    <button onclick="asignarGrupoCapa('<%= item.idGrupoCapa %>', '<%= idProspecto %>'); return false; " class="button is-primary" id="btn_asignarGrupoCapa">Asignar grupo</button>
+                    <button onclick="verGrupoCapa('<%= item.id %>')" class="button is-primary" name="btn_verGrupo" id="btn_verGrupo">Ver grupo</button>
+                </td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</div>
+<div class="modal" id="modalGrupoCapa">
+    <div onclick="cerrarModalGrupoCapa(); return false" class="modal-background"></div>
+    <div class="modal-content custom-modal-content-width" id="contenidoModalGrupoCapa"></div>
+    <button onclick="cerrarModalGrupoCapa(); return false" class="modal-close is-large" aria-label="close"></button>
+</div>
+<script type="text/javascript">
+    const modalGrupoCapa = document.querySelector("#modalGrupoCapa")
+    const contenidoModalGrupoCapa = document.querySelector("#contenidoModalGrupoCapa")
+    
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            // Cerrar el modal
+            modalGrupoCapa.classList.remove('is-active');
+        }
+    });
+</script>
