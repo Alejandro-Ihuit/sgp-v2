@@ -28,7 +28,6 @@
                 <tbody>
                 <% tablaProspectos.forEach((item) => { %>
                     <tr>
-                        <p hidden id="id_prospecto"><%= item.id_prospecto %></p>
                         <td><%= item.primer_nombre %></td>
                         <td><%= item.segundo_nombre %></td>
                         <td><%= item.primer_apellido %></td>
@@ -49,6 +48,7 @@
         <script type="text/javascript">
             const modalProspecto = document.querySelector("#modalProspecto")
             const contenidoModalProspecto = document.querySelector("#contenidoModalProspecto")
+
             function verProspecto(id_prospecto){
                 $.ajax({
                     url: "/modalProspecto",
@@ -65,5 +65,64 @@
                 modalProspecto.classList.remove('is-active')
             };
 
+            function cerrarModalGruposCapa(){
+                modalGruposCapa.classList.remove('is-active')
+            };
+
+            function verGruposCapa(idProspecto){
+                $.ajax({
+                    url: "/modalGruposCapa",
+                    type: "PUT",
+                    data: {idProspecto},
+                    success: function(res){
+                        modalGruposCapa.classList.add('is-active')
+                        contenidoModalGruposCapa.innerHTML = res
+                    }
+                })
+            }
+            
+            function verGrupoCapa(id){
+                $.ajax({
+                    url: "/modalGrupoCapa",
+                    type: "PUT",
+                    data: {id},
+                    success: function(res){
+                        modalProspecto.classList.add('is-active')
+                        contenidoModalProspecto.innerHTML = res
+                    }
+                })
+            }
+
+            function onlyNumbers (evt) {
+                //Lo llamamons mediante el evento event en la ventana
+                evt = (evt) ? evt : window.event;
+                //Tomamos su valor del caracter en codigo ASCII, y se almacena para comparar.
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                    
+                if(charCode > 47 && charCode < 58) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+
+            function validarCheck() {
+                const chkbx = document.getElementById('exp_check');
+                const campoExpCC = document.getElementById('cc_experience');
+                if( chkbx.checked ) {                 
+                    campoExpCC.removeAttribute("disabled");
+                }
+                else if(campoExpCC != ""){
+                    campoExpCC.value = 'ninguno';
+                }
+            }
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    // Cerrar el modal
+                    modalProspecto.classList.remove('is-active');
+                }
+            });
         </script>
 </body>
