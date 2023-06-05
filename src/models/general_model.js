@@ -1,4 +1,4 @@
-import { select, insert } from "../connections/base125.js";
+import { select, insert, update } from "../connections/base125.js";
 import { select210 } from "../connections/base210.js";
 
 const escuelasQuery = async() => {
@@ -22,14 +22,15 @@ const insertProspecto = async(prospecto) => { //fala agregar los try cath
     return await insert(query);
 }
 
-const actualizacionDeProspecto = async(infoProspecto) => {
+const actualizacionDeProspecto = async(formData) => {
     try{
         let query = `UPDATE sgp.prospectos 
-                SET primer_nombre = "", segundo_nombre = "", primer_apellido = "", segundo_apellido = "", fecha_nacimiento = "", curp = "", rfc = "", celular = "", dir_casa = "", codigo_postal = "", cc_experience = '', cc_placec = "", asesor_padrino = "", campania = "", turno = "", modalidad = "", horas_laborales = '', bono = "", fecha_ingreso = "", escuela = "", medios = "", estatus = "" 
-                WHERE id_prospecto = "";`
-        return await select(query);
+                    SET primer_nombre = '${formData.primer_nombre}', segundo_nombre = '${formData.segundo_nombre}', primer_apellido = '${formData.primer_apellido}', segundo_apellido = '${formData.segundo_apellido}', fecha_nacimiento = '${formData.fecha_nacimiento}', curp = '${formData.curp}', rfc = '${formData.rfc}', celular = '${formData.celular}', dir_casa = '${formData.dir_casa}', codigo_postal = '${formData.codigo_postal}', cc_experience = '${formData.cc_experience}', cc_place = '${formData.cc_place}', asesor_padrino = '${formData.asesor_padrino}', campania = '${formData.campania}', turno = '${formData.turno}', modalidad = '${formData.modalidad}', horas_laborales = '${formData.horas_laborales}', bono = '${formData.bono}', fecha_ingreso = '${formData.fecha_ingreso}', escuela = '${formData.escuela}', medios = '${formData.medios}', estatus = '${formData.estatus}' 
+                    WHERE id_prospecto = '${formData.id_prospecto}';`
+        return await update(query);
     }catch(error){
-        console.error('Error al insertar informacion: ',error);
+        console.error('Error al actualizar informacion: ',error);
+        throw error;
     }
     
 }
@@ -50,9 +51,8 @@ const informacionProspecto = async(id_prospecto) => {
                     order by id_prospecto asc;`;
         return await select(query);
     } catch (error) {
-        // Manejar el error aquí
         console.error('Error en la consulta Informacion prospecto:', error);
-        throw error; // Lanzar el error para que pueda ser manejado por quien llame a la función
+        throw error;
     }
 }
 
