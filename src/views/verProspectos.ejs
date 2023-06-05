@@ -61,6 +61,73 @@
                 })
             }
 
+
+function actualizarProspecto() {
+
+    Swal.fire({
+        title: '¿Actualizar informacion de prospecto?',
+        text: 'Antes de actualizar, verifica que hayas llenado todos los campos correspondientes, y, que la información esté debidamente ingresada/escrita.',
+        showCancelButton: true,
+        confirmButtonText: 'Actualizar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => { 
+        if (result.isConfirmed) {
+            
+    let formProspecto = document.getElementById("formProspecto");
+    let formData = new FormData(formProspecto);
+    
+            formData.append("id_prospecto", formProspecto.querySelector("#id_prospecto").value);
+            formData.append("primer_nombre", formProspecto.querySelector("#primer_nombre").value);
+            formData.append("segundo_nombre", formProspecto.querySelector("#segundo_nombre").value);
+            formData.append("primer_apellido", formProspecto.querySelector("#primer_apellido").value);
+            formData.append("segundo_apellido", formProspecto.querySelector("#segundo_apellido").value);
+            formData.append("fecha_nacimiento", formProspecto.querySelector("#fecha_nacimiento").value);
+            formData.append("curp", formProspecto.querySelector("#curp").value);
+            formData.append("dir_casa", formProspecto.querySelector("#dir_casa").value);
+            formData.append("celular", formProspecto.querySelector("#celular").value);
+            formData.append("rfc", formProspecto.querySelector("#rfc").value);
+            formData.append("codigo_postal", formProspecto.querySelector("#codigo_postal").value);
+            formData.append("escuela", formProspecto.querySelector("#escuela").value);
+            formData.append("medios", formProspecto.querySelector("#medioss").value);
+            formData.append("cc_experience", formProspecto.querySelector("#cc_experience").value);
+            formData.append("campania", formProspecto.querySelector("#campania").value);
+            formData.append("turno", formProspecto.querySelector("#turno").value);
+            formData.append("modalidad", formProspecto.querySelector("#modalidad").value);
+            formData.append("horas_laborales", formProspecto.querySelector("#horas_laborales").value);
+            formData.append("bono", formProspecto.querySelector("#bono").value);
+            formData.append("fecha_ingreso", formProspecto.querySelector("#fecha_ingreso").value);
+            formData.append("asesor_padrino", formProspecto.querySelector("#asesor_padrino").value);
+            formData.append("observaciones", formProspecto.querySelector("#observaciones").value);
+
+            $.ajax({
+                url: "/actualizarDatosProspecto",
+                type: "POST",
+                data: formData,
+                success: function(response) {
+                    switch(response.result) {
+                        case 0:
+                            Swal.fire(`No se pudo guardar la información`, 'Reporta  a Sistemas: insertFail', 'error');
+                            break;
+                        case 1: 
+                            Swal.fire(`Se ha guardado la información correctamente...`, '', 'success');
+                            break;
+                    }
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    // Manejar el error en caso de fallo
+                    console.error(error);
+                }
+            });
+        }
+    });
+}
+
+
+    const modalGruposCapa = document.querySelector("#modalGruposCapa")
+    const contenidoModalGruposCapa = document.querySelector("#contenidoModalGruposCapa")
+
+
             function cerrarModalProspecto(){
                 modalProspecto.classList.remove('is-active')
             };
