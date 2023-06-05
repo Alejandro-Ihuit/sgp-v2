@@ -46,9 +46,25 @@ const guardarProspecto = async(req, res) => {
     }
 }
 
-const actualizarProspecto = async(req, res) =>{
-    let actualizarProspecto = await actualizacionDeProspecto();
-    res.json({result});
+const actualizarDatosProspecto = async(req, res) =>{
+    const formData = req.body;
+
+    for (let clave in prospecto) {
+
+        if (typeof formData[clave] === 'string') {
+
+            formData[clave] = formData[clave].trim();
+        }
+    }
+    let result = await actualizacionDeProspecto(formData);
+
+    //validar resultado
+    if( result === 1 ) {
+        res.json({ result });
+    }
+    else {
+        res.json({ result: 0 });
+    }
 
 }
 
@@ -88,7 +104,7 @@ const cargarGruposCapa = async (req, res) => {
 export {
     verInformacionProspecto,
     formRegistrarProspecto,
-    actualizarProspecto,
+    actualizarDatosProspecto,
     guardarProspecto,
     cargarGruposCapa,
     verProspectos
