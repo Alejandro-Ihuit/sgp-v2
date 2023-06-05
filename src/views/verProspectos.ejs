@@ -75,29 +75,11 @@ function actualizarProspecto() {
             
     let formProspecto = document.getElementById("formProspecto");
     let formData = new FormData(formProspecto);
-    
-            formData.append("id_prospecto", formProspecto.querySelector("#id_prospecto").value);
-            formData.append("primer_nombre", formProspecto.querySelector("#primer_nombre").value);
-            formData.append("segundo_nombre", formProspecto.querySelector("#segundo_nombre").value);
-            formData.append("primer_apellido", formProspecto.querySelector("#primer_apellido").value);
-            formData.append("segundo_apellido", formProspecto.querySelector("#segundo_apellido").value);
-            formData.append("fecha_nacimiento", formProspecto.querySelector("#fecha_nacimiento").value);
-            formData.append("curp", formProspecto.querySelector("#curp").value);
-            formData.append("dir_casa", formProspecto.querySelector("#dir_casa").value);
-            formData.append("celular", formProspecto.querySelector("#celular").value);
-            formData.append("rfc", formProspecto.querySelector("#rfc").value);
-            formData.append("codigo_postal", formProspecto.querySelector("#codigo_postal").value);
-            formData.append("escuela", formProspecto.querySelector("#escuela").value);
-            formData.append("medios", formProspecto.querySelector("#medioss").value);
-            formData.append("cc_experience", formProspecto.querySelector("#cc_experience").value);
-            formData.append("campania", formProspecto.querySelector("#campania").value);
-            formData.append("turno", formProspecto.querySelector("#turno").value);
-            formData.append("modalidad", formProspecto.querySelector("#modalidad").value);
-            formData.append("horas_laborales", formProspecto.querySelector("#horas_laborales").value);
-            formData.append("bono", formProspecto.querySelector("#bono").value);
-            formData.append("fecha_ingreso", formProspecto.querySelector("#fecha_ingreso").value);
-            formData.append("asesor_padrino", formProspecto.querySelector("#asesor_padrino").value);
-            formData.append("observaciones", formProspecto.querySelector("#observaciones").value);
+
+    /*formData.append("id_prospecto", document.getElementById('id_prospecto').value);
+    formData.append("primer_nombre", document.getElementById('primer_nombre').value);
+    formData.append("segundo_nombre", document.getElementById('segundo_nombre').value);*/
+    console.log(formData)
 
             $.ajax({
                 url: "/actualizarDatosProspecto",
@@ -122,8 +104,6 @@ function actualizarProspecto() {
         }
     });
 }
-
-
     const modalGruposCapa = document.querySelector("#modalGruposCapa")
     const contenidoModalGruposCapa = document.querySelector("#contenidoModalGruposCapa")
 
