@@ -7,9 +7,9 @@
     <div class="columns">
     </div>
     <div class="columns is-justify-content-center is-align-items-center">
-        <label name="id_prospecto" id="id_prospecto" hidden><%= verInformacionProspecto[0].id_prospecto %></label>
+        <input type="text" name="id_prospecto" id="id_prospecto" hidden value="<%= verInformacionProspecto[0].id_prospecto %>">
         <div class="column is-2">
-            <label class="label" for="primer_nombre">Primer nombre</label>
+            <input class="label" for="primer_nombre">Primer nombre</label>
             <input class="input is-small" type="text" name="primer_nombre" id="primer_nombre" maxlength="30" value="<%= verInformacionProspecto[0].primer_nombre %>" required>
         </div>
         <div class="column is-2">
