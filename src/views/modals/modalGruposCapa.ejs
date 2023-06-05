@@ -31,7 +31,7 @@
                 <td><%= item.id_capacitacion %></td>
                 <td><%= item.encargado %></td>
                 <td><%= item.fecha_inicio %></td>
-                <td>
+                <td class="has-text-centered">
                     <button onclick="asignarGrupoCapa('<%= item.idGrupoCapa %>', '<%= idProspecto %>'); return false; " class="button is-primary" id="btn_asignarGrupoCapa">Asignar grupo</button>
                     <button onclick="verGrupoCapa('<%= item.id %>')" class="button is-primary" name="btn_verGrupo" id="btn_verGrupo">Ver grupo</button>
                 </td>
