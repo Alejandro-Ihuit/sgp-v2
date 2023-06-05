@@ -1,4 +1,4 @@
-<form class="column is-12 box" name="actualizarInfo" id="actualizarInfo">
+<form class="column is-12 box" name="formProspecto" id="formProspecto">
 
     <div class="columns has-text-centered is-flex">
     </div>
@@ -173,9 +173,10 @@
             </div>
         </div>
     </div>
+    
     <div class="levels">
         <div class="level-right">
-            <button class="button is-success" id="btnActualizarProspecto" onclick="actualizarProspecto(); return false;">ACTUALIZAR PROSPECTO</button>
+            <button class="button is-success" name="btnActualizarProspecto" onclick="actualizarProspecto(); return false;" id="btnActualizarProspecto">ACTUALIZAR PROSPECTO</button>
             <button class="button is-success" id="ingresarCapacitacion" onclick="verGruposCapa(<%= verInformacionProspecto[0].id_prospecto %>); return false;" style="margin-left: 50px;">INGRESAR A CAPACITACION</button>
             <button class="button is-success" id="scarCapacitacion" onclick="sacarCapacitacion(); return false;" style="margin-left: 50px;">SACAR DE CAPACITACION</button>
         </div>
@@ -189,9 +190,6 @@
 </div>
 
 <script type="text/javascript">
-    const modalGruposCapa = document.querySelector("#modalGruposCapa")
-    const contenidoModalGruposCapa = document.querySelector("#contenidoModalGruposCapa")
-
     function verGruposCapa(idProspecto){
         $.ajax({
             url: "/modalGruposCapa",
@@ -202,13 +200,5 @@
                 contenidoModalGruposCapa.innerHTML = res
             }
         })
-    }
-
-    function actualizarProspecto(){
-        console.log("Entro a la funcion")
-        return;
-        const nuevosDatos = document.querySelector("#actualizarInfo");
-        var nuevosDatosProspecto = new FormData("nuevosDatos");
-        console.log(nuevosDatos);
     }
 </script>
