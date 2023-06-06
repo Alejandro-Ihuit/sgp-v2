@@ -22,11 +22,12 @@ const insertProspecto = async(prospecto) => { //fala agregar los try cath
     return await insert(query);
 }
 
-const actualizacionDeProspecto = async(formData) => {
+const actualizacionDeProspecto = async(info) => {
     try{
         let query = `UPDATE sgp.prospectos 
-                    SET primer_nombre = '${formData.primer_nombre}', segundo_nombre = '${formData.segundo_nombre}', primer_apellido = '${formData.primer_apellido}', segundo_apellido = '${formData.segundo_apellido}', fecha_nacimiento = '${formData.fecha_nacimiento}', curp = '${formData.curp}', rfc = '${formData.rfc}', celular = '${formData.celular}', dir_casa = '${formData.dir_casa}', codigo_postal = '${formData.codigo_postal}', cc_experience = '${formData.cc_experience}', cc_place = '${formData.cc_place}', asesor_padrino = '${formData.asesor_padrino}', campania = '${formData.campania}', turno = '${formData.turno}', modalidad = '${formData.modalidad}', horas_laborales = '${formData.horas_laborales}', bono = '${formData.bono}', fecha_ingreso = '${formData.fecha_ingreso}', escuela = '${formData.escuela}', medios = '${formData.medios}', estatus = '${formData.estatus}' 
-                    WHERE id_prospecto = '${formData.id_prospecto}';`
+                    SET primer_nombre = '${info.primer_nombre}', segundo_nombre = '${info.segundo_nombre}', primer_apellido = '${info.primer_apellido}', segundo_apellido = '${info.segundo_apellido}', fecha_nacimiento = '${info.fecha_nacimiento}', curp = '${info.curp}', rfc = '${info.rfc}', celular = '${info.celular}', dir_casa = '${info.dir_casa}', codigo_postal = '${info.codigo_postal}', cc_experience = '${info.cc_experience}', cc_place = '${info.cc_place}', asesor_padrino = '${info.asesor_padrino}', campania = '${info.campania}', turno = '${info.turno}', modalidad = '${info.modalidad}', horas_laborales = '${info.horas_laborales}', bono = '${info.bono}', fecha_ingreso = '${info.fecha_ingreso}', escuela = '${info.escuela}', medios = '${info.medios}' 
+                    WHERE id_prospecto = '${info.id_prospecto}';`
+        console.log(query);
         return await update(query);
     }catch(error){
         console.error('Error al actualizar informacion: ',error);
