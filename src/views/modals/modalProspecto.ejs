@@ -4,12 +4,12 @@
     </div>
     <div class="divider is-info">DATOS PERSONALES</div>
 
-    <div class="columns">
+    <div hidden>
+        <input type="text" name="id_prospecto" id="id_prospecto" value="<%= verInformacionProspecto[0].id_prospecto %>">
     </div>
     <div class="columns is-justify-content-center is-align-items-center">
-        <input type="text" name="id_prospecto" id="id_prospecto" hidden value="<%= verInformacionProspecto[0].id_prospecto %>">
         <div class="column is-2">
-            <input class="label" for="primer_nombre">Primer nombre</label>
+            <label class="label" for="primer_nombre">Primer nombre</label>
             <input class="input is-small" type="text" name="primer_nombre" id="primer_nombre" maxlength="30" value="<%= verInformacionProspecto[0].primer_nombre %>" required>
         </div>
         <div class="column is-2">
@@ -66,7 +66,7 @@
         <div class="column is-3">
             <label class="label" for="enterado_vacante">¿Cómo se enteró de la vacante?</label>
             <div class="select is-small is-fullwidth">
-                <select name="medios" id="medioss">
+                <select name="medios" id="medios">
                     <option value="<%= verInformacionProspecto[0].medios %>" disabled="" selected="<%= verInformacionProspecto[0].medios %>"><%= verInformacionProspecto[0].medios %></option>
                     <option value="ASESOR PADRINO">ASESOR PADRINO</option>
                     <option value="FACEBOOK">FACEBOOK</option>
@@ -85,19 +85,19 @@
                     <option value="CETEC">CETEC</option>
                     <option value="UNID">UNID</option>
                     <option value="COMPUTRABAJO">COMPUTRABAJO</option>
-                    <option value="OTRO">OTRO</option><option value="TEC DE MERIDA">TEC DE MÉRIDA</option>
+                    <option value="TEC DE MERIDA">TEC DE MÉRIDA</option>
+                    <option value="OTRO">OTRO</option>
                 </select>
             </div>
         </div>
 
-        
         <div class="column is-3">
             <div>
                 <label class="label" for="cc_experience">¿En cuál fué?</label>
-                    <input class="input is-small" type="text" name="cc_experience" id="cc_experience" disabled>
+                <input class="input is-small" type="text" name="cc_experience" id="cc_experience" value="1">
             </div>
-            <label class="mt-1 checkbox is-flex is-align-content-center" id="check_cc">
-                <input id="exp_check" type="checkbox" onclick="validarCheck();" >  
+            <label class="mt-1 checkbox is-flex is-align-content-center" name="check_cc" id="check_cc">
+                <input id="exp_check" name="exp_check" type="checkbox" onclick="validarCheck();" >  
                 ¿Experiencia en Call Center?
             </label>
         </div>
@@ -106,7 +106,7 @@
             <label class="label" for="campania">Campaña de Interés</label>
             <div class="select is-small is-fullwidth">
                 <select name="campania" id="campania" required>
-                    <option value="-" disabled="" selected="<%= verInformacionProspecto[0].campania %>"><%= verInformacionProspecto[0].campania %></option>
+                    <option value="<%= verInformacionProspecto[0].campania %>" disabled="" selected="<%= verInformacionProspecto[0].campania %>"><%= verInformacionProspecto[0].campania %></option>
                     <% resultadoCampanias.forEach( item => { %>
                         <option value="<%= item.nombre_campania %>"><%= item.nombre_campania %></option>
                     <% }); %>
