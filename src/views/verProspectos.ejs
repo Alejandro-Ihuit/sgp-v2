@@ -61,52 +61,54 @@
                 })
             }
 
+            function actualizarProspecto() {
 
-function actualizarProspecto() {
+                Swal.fire({
+                    title: '¿Actualizar informacion de prospecto?',
+                    text: 'Antes de actualizar, verifica que hayas llenado todos los campos correspondientes, y, que la información esté debidamente ingresada/escrita.',
+                    showCancelButton: true,
+                    confirmButtonText: 'Actualizar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => { 
+                    if (result.isConfirmed) {
 
-    Swal.fire({
-        title: '¿Actualizar informacion de prospecto?',
-        text: 'Antes de actualizar, verifica que hayas llenado todos los campos correspondientes, y, que la información esté debidamente ingresada/escrita.',
-        showCancelButton: true,
-        confirmButtonText: 'Actualizar',
-        cancelButtonText: 'Cancelar'
-    }).then((result) => { 
-        if (result.isConfirmed) {
-            
-    let formProspecto = document.getElementById("formProspecto");
-    let formData = new FormData(formProspecto);
+                        let formProspecto = document.getElementById("formProspecto");
+                        let formData = new FormData(formProspecto);
 
-    /*formData.append("id_prospecto", document.getElementById('id_prospecto').value);
-    formData.append("primer_nombre", document.getElementById('primer_nombre').value);
-    formData.append("segundo_nombre", document.getElementById('segundo_nombre').value);*/
-    console.log(formData)
+                        const nuevosDatos = {}
+                        for( let pair of formData.entries() ) {
+                            nuevosDatos[pair[0]] = pair[1];
+                        }
 
-            $.ajax({
-                url: "/actualizarDatosProspecto",
-                type: "POST",
-                data: formData,
-                success: function(response) {
-                    switch(response.result) {
-                        case 0:
-                            Swal.fire(`No se pudo guardar la información`, 'Reporta  a Sistemas: insertFail', 'error');
-                            break;
-                        case 1: 
-                            Swal.fire(`Se ha guardado la información correctamente...`, '', 'success');
-                            break;
+                        console.log(nuevosDatos)
+                        console.log(formData)
+                        return;
+                        $.ajax({
+                            url: "/actualizarDatosProspecto",
+                            type: "POST",
+                            data: nuevosDatos,
+                            success: function(response) {
+                                switch(response.result) {
+                                    case 0:
+                                        Swal.fire(`No se pudo guardar la información`, 'Reporta  a Sistemas: insertFail', 'error');
+                                        break;
+                                    case 1: 
+                                        Swal.fire(`Se ha guardado la información correctamente...`, '', 'success');
+                                        break;
+                                }
+                                console.log(response);
+                            },
+                            error: function(error) {
+                                // Manejar el error en caso de fallo
+                                console.error(error);
+                            }
+                        });
                     }
-                    console.log(response);
-                },
-                error: function(xhr, status, error) {
-                    // Manejar el error en caso de fallo
-                    console.error(error);
-                }
-            });
-        }
-    });
-}
-    const modalGruposCapa = document.querySelector("#modalGruposCapa")
-    const contenidoModalGruposCapa = document.querySelector("#contenidoModalGruposCapa")
+                });
+            }
 
+            const modalGruposCapa = document.querySelector("#modalGruposCapa")
+            const contenidoModalGruposCapa = document.querySelector("#contenidoModalGruposCapa")
 
             function cerrarModalProspecto(){
                 modalProspecto.classList.remove('is-active')
