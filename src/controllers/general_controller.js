@@ -47,17 +47,9 @@ const guardarProspecto = async(req, res) => {
 }
 
 const actualizarDatosProspecto = async(req, res) =>{
-    const formData = req.body;
-
-    for (let clave in prospecto) {
-
-        if (typeof formData[clave] === 'string') {
-
-            formData[clave] = formData[clave].trim();
-        }
-    }
-    let result = await actualizacionDeProspecto(formData);
-
+    const info = req.body;
+    let result = await actualizacionDeProspecto(info);
+    console.log(info)
     //validar resultado
     if( result === 1 ) {
         res.json({ result });
@@ -96,7 +88,7 @@ const cargarGruposCapa = async (req, res) => {
         ...grupo,
         fecha_inicio: fechaFormateada
     };
-    });
+});
     
     res.render('modals/modalGruposCapa', { verGruposCapa: gruposFormateados, 'idProspecto': idProspecto});
 }
